@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground, ScrollView, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
+import SVGComponent from './components/SVGComponent';
 
 // Definindo a imagem de fundo com um URI (endereço da imagem na web)
 const backgroundImage = { uri: "https://s2.glbimg.com/M9JUg8c-K0ISMzZ4Y5bvvrMY7hE=/0x0:1920x1080/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2021/w/G/dwaQC1QXOMXJkSwXTt7w/ultravioleta-07.jpg" };
@@ -13,22 +14,29 @@ export default function App() {
   // Função chamada ao pressionar o botão de login
   const handleLogin = () => {
     Alert.alert('Login', `Email: ${email}\nPassword: ${password}`);
+
   };
 
   // Função chamada ao pressionar o botão de cadastro
   const handleRegister = () => {
     Alert.alert('Cadastro', 'Navegar para a tela de cadastro.');
+    
   };
 
   return (
     // ImageBackground permite usar uma imagem como plano de fundo
     <ImageBackground source={backgroundImage} style={styles.background}>
       <View style={styles.overlay}>
+            <View style={styles.svgContainer}>
+             <SVGComponent style={styles.svg} />
+            </View>
         {/* ScrollView permite rolar o conteúdo se for maior que a tela */}
         <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
           {/* Texto de boas-vindas */}
           <Text style={styles.texto}>Bem-Vindo ao Nubank</Text>
-          
+
+          {/* Componente SVG do Nubank */}
+         
           {/* Input de E-mail */}
           <TextInput
             style={styles.input}
@@ -90,11 +98,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold', // Texto em negrito
     color: 'white', // Cor do texto branca
     fontSize: 30, // Tamanho da fonte 30
-    marginBottom: 20,
+    marginBottom: 30,
+    textShadowOffset:{ width: 2, height: 2 }, // Deslocamento da sombra
+    textShadowColor: 'black',
+    textShadowRadius: 10, // Raio da sombra
+
   },
+
+     
+svgContainer: {
+  position: 'absolute',
+  top: 10, // Ajuste conforme necessário
+  left: 10, // Ajuste conforme necessário
+
+},
+
   // Estilo para os inputs
   input: {
-    width: '80%', // Largura do input
+    width: '70%', // Largura do input
     height: 40, // Altura do input
     backgroundColor: 'white', // Cor de fundo branca
     borderRadius: 5, // Bordas arredondadas
@@ -102,13 +123,18 @@ const styles = StyleSheet.create({
     marginVertical: 10, // Espaçamento vertical externo
     borderColor: 'black', // Cor da borda preta
     borderWidth: 1, // Largura da borda
+
   },
+
+
   // Estilo para o texto de cadastro
   registerText: {
     color: 'white', // Cor do texto branca
     marginTop: 20, // Margem superior
     marginBottom: 10, // Margem inferior
+
   },
+
   // Estilo para o botão de cadastro
   registerButton: {
     backgroundColor: '#841584', // Cor de fundo do botão
@@ -117,10 +143,14 @@ const styles = StyleSheet.create({
     borderRadius: 5, // Bordas arredondadas
     borderColor: 'black', // Cor da borda preta
     borderWidth: 1, // Largura da borda
+
   },
+
   // Estilo para o texto do botão de cadastro
   registerButtonText: {
     color: 'white', // Cor do texto branca
     fontWeight: 'bold', // Texto em negrito
+
   },
+
 });
